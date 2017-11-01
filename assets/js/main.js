@@ -4,7 +4,7 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-var win = $(window),
+/*var win = $(window),
     nav = $('nav'),
 
     pos = nav.offset().top,
@@ -14,7 +14,7 @@ var win = $(window),
       : nav.removeClass('sticky')
     }
 
-win.scroll(sticky)
+win.scroll(sticky)*/
 
 
 (function($) {
