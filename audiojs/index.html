@@ -7,9 +7,48 @@
     <script src="./audiojs/audio.min.js"></script>
     <link rel="stylesheet" href="./includes/index.css" media="screen">
     <script>
-      audiojs.events.ready(function() {
-        audiojs.createAll();
-      });
+        $(function() {
+            // Setup the player to autoplay the next track
+            var a = audiojs.createAll({
+                trackEnded: function() {
+                    var next = $('ol li.playing').next();
+                    if (!next.length) next = $('ol li').first();
+                    next.addClass('playing').siblings().removeClass('playing');
+                    audio.load($('a', next).attr('data-src'));
+                    audio.play();
+                }
+            });
+            // Load in the first track
+            var audio = a[0];
+            first = $('ol a').attr('data-src');
+            $('ol li').first().addClass('playing');
+            audio.load(first);
+            // Load in a track on click
+            $('ol li').click(function(e) {
+                e.preventDefault();
+                $(this).addClass('playing').siblings().removeClass('playing');
+                audio.load($('a', this).attr('data-src'));
+                audio.play();
+            });
+            // Keyboard shortcuts
+            $(document).keydown(function(e) {
+                var unicode = e.charCode ? e.charCode : e.keyCode;
+                // right arrow
+                if (unicode == 39) {
+                    var next = $('li.playing').next();
+                    if (!next.length) next = $('ol li').first();
+                    next.click();
+                    // back arrow
+                } else if (unicode == 37) {
+                    var prev = $('li.playing').prev();
+                    if (!prev.length) prev = $('ol li').last();
+                    prev.click();
+                    // spacebar
+                } else if (unicode == 32) {
+                    audio.playPause();
+                }
+            })
+        });
     </script>
   </head>
   <body>
@@ -17,11 +56,21 @@
       <h1>audio.js</h1>
     </header>
 
-    <audio preload src="http://kolber.github.io/audiojs/demos/mp3/juicy.mp3" preload="auto"></audio>
+   <div id="wrapper">
+    <h1>Bensound Royalty Free Tracks</h1>
+    <audio preload></audio>
     <ol>
-      <li class>
-        <a href="#" data-src="http://kolber.github.io/audiojs/demos/mp3/juicy.mp3">juicy</a>
-      </li>
+        <li><a href="#" data-src="../mp3/bensound-dubstep.mp3">Dubstep</a></li>
+        <li><a href="#" data-src="../mp3/bensound-cute.mp3">Cute</a></li>
+        <li><a href="#" data-src="../mp3/bensound-buddy.mp3">Buddy</a></li>
+        <li><a href="#" data-src="../mp3/bensound-acousticbreeze.mp3">Acoustic Breeze</a></li>
+        <li><a href="#" data-src="../mp3/bensound-epic.mp3">Epic</a></li>
+        <li><a href="#" data-src="../mp3/bensound-funnysong.mp3">Funny Song</a></li>
+        <li><a href="#" data-src="../mp3/bensound-littleidea.mp3">Little Idea</a></li>
+        <li><a href="#" data-src="../mp3/bensound-betterdays.mp3">Better Days</a></li>
+    </ol>
+  </div>
+
 
     <h2>audio.js is a drop-in javascript library that allows HTML5’s &lt;audio&gt; tag to be used anywhere.</h2>
 
