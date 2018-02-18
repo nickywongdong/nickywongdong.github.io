@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <!--
-	Massively by HTML5 UP
+	Hyperspace by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
@@ -8,10 +8,11 @@
 	<head>
 		<title>Nicholas Wong</title>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		<link rel="icon" type="image/png" href="https://nickywongdong.github.io/images/favicon_icon.png"
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 	</head>
 
 <!-- SCM Music Player http://scmplayer.co -->
@@ -26,162 +27,167 @@ data-config="{'skin':'skins/black/skin.css','volume':50,'autoplay':false,'shuffl
 {'title':'DJ Okawari - Another Sky','url':'https://nickywongdong.github.io/music/another_sky.mp3'}]}" ></script>
 <!-- SCM Music Player script end -->
 
-		<!-- Wrapper -->
-			<div id="wrapper" class="fade-in">
 
-				<!-- Intro -->
-					<div id="intro">
-						<p>Hi, I'm Nick Wong, <br />
-						Welcome to my website.</p>
-						<ul class="actions">
-							<li><a href="#header" class="button icon solo fa-arrow-down scrolly">Continue</a></li>
-						</ul>
-					</div>
+	<body>
 
-				<!-- Header -->
-					<header id="header">
-						<a href="index.html" class="logo">Nick Wong</a>
-					</header>
-
-				<!-- Nav -->
-					<nav id="nav">
-						<ul class="links">
-							<li class="active"><a href="index.html">Home</a></li>
-							<li><a href="generic.html">Music</a></li>
-							<li><a href="elements.html">Elements Reference</a></li>
-						</ul>
-						<ul class="icons">
-							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-							<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="https://github.com/nickywongdong" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+					<nav>
+						<ul>
+							<li><a href="#intro">Hi</a></li>
+							<li><a href="#one">Who am I</a></li>
+							<li><a href="#two">My Classwork</a></li>
+							<li><a href="#three">Get in touch</a></li>
 						</ul>
 					</nav>
+				</div>
+			</section>
 
-				<!-- Main -->
-					<div id="main">
+		<!-- Wrapper -->
+			<div id="wrapper">
 
-						<!-- Featured Post -->
-							<!--<article class="post featured">
-								<header class="major">
-									<span class="date">April 25, 2017</span>
-									<h2><a href="#">And this is a<br />
-									massive headline</a></h2>
-									<p>Aenean ornare velit lacus varius enim ullamcorper proin aliquam<br />
-									facilisis ante sed etiam magna interdum congue. Lorem ipsum dolor<br />
-									amet nullam sed etiam veroeros.</p>
-								</header>
-								<a href="#" class="image main"><img src="images/pic01.jpg" alt="" /></a>
-								<ul class="actions">
-									<li><a href="#" class="button big">Full Story</a></li>
-								</ul>
-							</article>-->
+				<!-- Intro -->
+					<section id="intro" class="wrapper style1 fullscreen fade-up">
+						<div class="inner">
+							<h1>Hi</h1>
+							<p>This is my personal website. Press play at the top to listen to some music.</p>
+							<ul class="actions">
+								<li><a href="#one" class="button scrolly">Learn more about me</a></li>
+							</ul>
+						</div>
+					</section>
 
-								<article>
-									<header>
-										<!--<span class="date">April 24, 2017</span>-->
-										<h2><a href="#">About Me</a></h2>
-									</header>
-									<a href="#" class="image fit"><img src="images/image1.jpg" alt="" /></a>
-									<p>I'm a student studying Computer Science at Oregon State. In my free time I like to listen to music, and you can find a playlist at the top of the website, or play from your mobile in the music tab.</p>
-									<!--<ul class="actions">
-										<li><a href="#" class="button">Full Story</a></li>
-									</ul>-->
-								</article>
-								<article>
-									<header>
-										<!--<span class="date">April 22, 2017</span>-->
-										<h2><a href="#">Experience</a></h2>
-									</header>
-									<a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-									<!--<ul class="actions">
-										<li><a href="#" class="button">Full Story</a></li>
-									</ul>-->
-								</article>
-								<article>
-									<header>
-										<h2><a href="#">Showcase</a></h2>
-									</header>
-									<a href="#" class="image fit"><img src="images/pic04.jpg" alt="" /></a>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-									<!--<ul class="actions">
-										<li><a href="#" class="button">Full Story</a></li>-->
-									</ul>
-								</article>
-								
-
-						<!-- Footer -->
-						<!--
-							<footer>
-								<div class="pagination">
-									<a href="#" class="previous">Prev</a>	//this was commented out
-									<a href="#" class="page active">1</a>
-									<a href="#" class="page">2</a>
-									<a href="#" class="page">3</a>
-									<span class="extra">&hellip;</span>
-									<a href="#" class="page">8</a>
-									<a href="#" class="page">9</a>
-									<a href="#" class="page">10</a>
-									<a href="#" class="next">Next</a>
-								</div>
-							</footer><-->
-
-					</div>
-
-				<!-- Footer -->
-					<footer id="footer">
-						<!--
+				<!-- One -->
+					<section id="one" class="wrapper style2 spotlights">
 						<section>
-							<form method="post" action="#">
-								<div class="field">
-									<label for="name">Name</label>
-									<input type="text" name="name" id="name" />
+							<a href="#" class="image"><img src="images/pic01.jpg" alt="" data-position="center center" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Nick Wong</h2>
+									<p>I'm a student at Oregon State studying Computer Science.</p>
+									<ul class="actions">
+										<li><a href="#" class="button">Learn more</a></li>
+									</ul>
 								</div>
-								<div class="field">
-									<label for="email">Email</label>
-									<input type="text" name="email" id="email" />
-								</div>
-								<div class="field">
-									<label for="message">Message</label>
-									<textarea name="message" id="message" rows="3"></textarea>
-								</div>
-								<ul class="actions">
-									<li><input type="submit" value="Send Message" /></li>
-								</ul>
-							</form>
-						</section>-->
-						<section class="split contact">
-							<section class="alt">
-								<h3>Address</h3>
-								<p>Oregon State University<br />
-								Corvallis, OR 97330</p>
-							</section>
-							<section>
-								<h3>Phone</h3>
-								<p><a href="#">(503) 703-5196</a></p>
-							</section>
-							<section>
-								<h3>Email</h3>
-								<p><a href="#">wongnich@gmail.com</a></p>
-							</section>
-							<section>
-								<h3>Github</h3>
-								<ul class="icons alt">
-									<li><a href="https://github.com/nickywongdong" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
-									<li><a href="wongnich@gmail.com" class="icon alt fa-email"><span class="label">Email"</span></a></li>
-
-								</ul>
-							</section>
+							</div>
 						</section>
-					</footer>
+						<section>
+							<a href="#" class="image"><img src="images/pic02.jpg" alt="" data-position="top center" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Feugiat consequat</h2>
+									<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
+									<ul class="actions">
+										<li><a href="#" class="button">Learn more</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+						<section>
+							<a href="#" class="image"><img src="images/pic03.jpg" alt="" data-position="25% 25%" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Ultricies aliquam</h2>
+									<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
+									<ul class="actions">
+										<li><a href="#" class="button">Learn more</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+					</section>
 
-				<!-- Copyright -->
-					<div id="copyright">
-						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
-					</div>
+				<!-- Two -->
+					<section id="two" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>My Classwork</h2>
+							<p>Here i'll try to post my coursework as a Computer Science student.</p>
+							<div class="features">
+								<section>
+									<span class="icon major fa-code"></span>
+									<h3>Lorem ipsum amet</h3>
+									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
+								</section>
+								<section>
+									<span class="icon major fa-lock"></span>
+									<h3>Aliquam sed nullam</h3>
+									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
+								</section>
+								<section>
+									<span class="icon major fa-cog"></span>
+									<h3>Sed erat ullam corper</h3>
+									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
+								</section>
+								<section>
+									<span class="icon major fa-desktop"></span>
+									<h3>Veroeros quis lorem</h3>
+									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
+								</section>
+								<section>
+									<span class="icon major fa-chain"></span>
+									<h3>Urna quis bibendum</h3>
+									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
+								</section>
+								<section>
+									<span class="icon major fa-diamond"></span>
+									<h3>Aliquam urna dapibus</h3>
+									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
+								</section>
+							</div>
+							<ul class="actions">
+								<li><a href="#" class="button">Learn more</a></li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- Three -->
+					<section id="three" class="wrapper style1 fade-up">
+						<div class="inner">
+							<h2>Get in touch</h2>
+							<p>Here's more of my info</p>
+							<div class="split style1">
+								<section>
+									<ul class="contact">
+										<li>
+											<h3>Address</h3>
+											<span>Oregon State University<br />
+											Corvallis, OR 97330<br />
+											USA</span>
+										</li>
+										<li>
+											<h3>Email</h3>
+											<a href="#">wongnich@gmail.com</a>
+										</li>
+										<li>
+											<h3>Phone</h3>
+											<span>(503) 703-5196</span>
+										</li>
+										<li>
+											<h3>Social</h3>
+											<ul class="icons">
+												<li><a href="https://github.com/nickywongdong/resume/wongnichResume2018" class="fa fa-file-text"><span class="label">Resume</span></a></li>
+												
+												<li><a href="https://github.com/nickywongdong" class="fa-github"><span class="label">GitHub</span></a></li>
+												<li><a href="www.linkedin.com/in/nicholas-wong-5b836091" class="fa-linkedin"><span class="label">LinkedIn</span></a></li>
+											</ul>
+										</li>
+									</ul>
+								</section>
+							</div>
+						</div>
+					</section>
 
 			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper style1-alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</div>
+			</footer>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
@@ -189,6 +195,7 @@ data-config="{'skin':'skins/black/skin.css','volume':50,'autoplay':false,'shuffl
 			<script src="assets/js/jquery.scrolly.min.js"></script>
 			<script src="assets/js/skel.min.js"></script>
 			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
 
 	</body>
