@@ -1,0 +1,10 @@
+{
+  "name": "CS340-Sample-Web-App",
+  "main": [
+    "Gruntfile.js"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.0.3"
+  },
+  "version": "0.1.0"
+}
