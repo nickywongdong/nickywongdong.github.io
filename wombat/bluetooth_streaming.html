@@ -37,12 +37,12 @@
 							<p>To set up Bluetooth media streaming on the Jetson, it first had to be set up to allow connections with bluetooth devices.</p>
               <p>Although somewhat outdated, the following resource was used to help the process: <a href="https://blog.stevenocchipinti.com/2012/10/bluetooth-audio-streaming-from-phone-to.html/">https://blog.stevenocchipinti.com/2012/10/bluetooth-audio-streaming-from-phone-to.html/</a>.</p>
               <p>First, pulseaudio was installed: <code>sudo apt-get install pulseaudio</code>.</p>
-              <p>First, the following line was added to the file <code>/etc/bluetooth/main.conf</code>: <code>Enable=Gateway,Source,Socket</code>
-                Then the bluetooth daemon was restarted using: <code>sudo service bluetooth restart</code>
-                Then a phone was paired with the Jetson using the tool bluetoothctl. The specific steps were:
+              <p>Then, the following line was added to the file <code>/etc/bluetooth/main.conf</code>: <code>Enable=Gateway,Source,Socket</code><br>
+                Then the bluetooth daemon was restarted using: <code>sudo service bluetooth restart</code><br>
+                Then a phone was paired with the Jetson using the tool bluetoothctl. The specific steps were:<br>
                 <code>bluetoothctl scan on</code><br>
                 <code>bluetoothctl pair (Bluetooth Address of Phone)</code><br>
-                The pair was successful, but the connection was not. To fix this, the following line of code was ran to load bluetooth module: <br>
+                The pair was successful, but the connection was not. To fix this, the following line of code was ran to load a bluetooth module: <br>
                 <code>pactl load-module module-bluetooth-discover</code><br>
                 Then the following was added uncommented to the file <code>etc/pulse/daemon.conf</code> after the commented out line <code>resample method...</code> <br>
                 <code>resample-method = trivial</code><br>
@@ -52,7 +52,7 @@
                 <code>pacmd list-sources </code><br>
                 Then list the sinks: <br>
                 <code>pacmd list-sinks</code><br>
-                Then set the source (the bluetooth device) and sink (the speaker) using: <br>
+                Then set the source (the bluetooth device) and sink (the speaker) using: <i>Where the xxxx's are found through the first two commands.</i><br>
                 <code>load-module module-loopback source=bluez_source.xxxx sink=alsa_output.pci-xxxx</code>.
               </p>
 						</div>
