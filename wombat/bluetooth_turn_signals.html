@@ -38,7 +38,7 @@
 							<span class="image fit"><img src="images/pic04.jpg" alt="" /></span>
 							<p>In order to set up the turn signals on the RaspberryPi, a method of wireless communications needed to be set up between the Jetson TX2, and the Raspberry Pi 3.
 								We decided to use Bluetooth for its simplicity. The Jetson TX2 was set up as a server, sending data to the Raspberry Pi, which was set up as a client.
-								The example code for the client.c and server.c was sourced from https://people.csail.mit.edu/albert/bluez-intro/x502.html.
+								The example code for the client.c and server.c was sourced from <a href="https://people.csail.mit.edu/albert/bluez-intro/x502.html">https://people.csail.mit.edu/albert/bluez-intro/x502.html</a>.
 								The only things that were changed were the hard coded addresses, and the data that is sent to the Raspberry.
 								For now, the program only sends simple signals to the Raspberry Pi, and the Raspberry Pi will output text based on the signal sent.
 							</p>
@@ -51,12 +51,6 @@
 							<section id="server" class="wrapper">
 							<h3>Example Server Code</h3>
 									<pre><code>
-
-										#include <stdio.h>
-#include <unistd.h>
-#include <sys/socket.h>
-#include <bluetooth/bluetooth.h>
-#include <bluetooth/rfcomm.h>
 
 int main(int argc, char **argv)
 {
