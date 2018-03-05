@@ -1,0 +1,82 @@
+
+
+/*1. Select the make_name and model_name of all vehicles which have a first production year of 1976
+
+MySQL Query:
+
+select distinct make_name, model_name from Make, Model
+INNER Join Vehicle on Vehicle.fk_make_id = Make.make_id
+	and Vehicle.fk_model_id = Model.model_id
+Where first_production_year = ‘1976’;*/
+
+
+/*Relational Algebra Expression:*/
+
+π make_name, model_name
+σ (first_production_year = '1976' )
+((Make ⨯ Model )
+⨝ Vehicle.fk_make_id = Make.make_id ∧ Vehicle.fk_model_id = Model.model_id Vehicle)
+
+/*2. Select the make_name and model_name of all vehicles with the color name Blue
+
+MySQL Query:
+
+select distinct make_name, model_name from Model, Make
+left join Vehicle on Vehicle.fk_make_id = Make.make_id
+		and Vehicle.fk_model_id = Model.model_id
+left join Inventory on Inventory.fk_vehicle_id = Vehicle.vehicle_id
+left join Color on color_id = Inventory.fk_color_id
+WHERE Color.name = 'Blue'*/
+
+
+/*Relational Algebra:*/
+
+π make_name, model_name
+σ Color.name = 'Blue'
+((((Model ⨯ Make)
+⟕ Vehicle.fk_make_id = Make.make_id ∧ Vehicle.fk_model_id = Model.model_id Vehicle )
+⟕ Inventory.fk_vehicle_id = Vehicle.vehicle_id Inventory )
+⟕ color_id = Inventory.fk_color_id Color)
+
+
+/*3. Select the make_name, model_name and incentive amount for all vehicles with a dealer type
+incentive
+
+MySQL Query:
+select distinct make_name, model_name, amount
+from Make, Model, Incentive
+inner join Vehicle on Vehicle.fk_make_id = Make.make_id
+	and Vehicle.fk_model_id = Model.model_id
+inner join Vehicle_Incentive on Vehicle_Incentive.fk_vehicle_id = Vehicle.vehicle_id
+Where Incentive.type = 'dealer'*/
+
+
+/*Relational Algebra:*/
+
+π make_name, model_name, amount
+σ Incentive.type = 'dealer'
+(((Make ⨯ Model ⨯ Incentive )
+⨝ Vehicle.fk_make_id = Make.make_id ∧ Vehicle.fk_model_id = Model.model_id Vehicle)
+⨝ Vehicle_Incentive.fk_vehicle_id = Vehicle.vehicle_id Vehicle_Incentive)
+
+
+/*4. Convert the following query to relational algebra
+SELECT Player.id, Team.name, City.name FROM Player
+INNER JOIN Team ON Player.team_id = Team.id
+INNER JOIN City ON Team.city_id = City.id
+WHERE Player.score = 100;*/
+
+π Player.id, Team.name, City.name
+σ Player.score = 100
+(((Player)
+⨝ Player.team_id = Team.id Team)
+⨝ Team.city_id = City.id City)
+
+/*5. For problem 3 above, convert your relational algebra query into a SQL query. */
+
+select distinct make_name, model_name, amount
+from Make, Model, Incentive
+inner join Vehicle on Vehicle.fk_make_id = Make.make_id
+	and Vehicle.fk_model_id = Model.model_id
+inner join Vehicle_Incentive on Vehicle_Incentive.fk_vehicle_id = Vehicle.vehicle_id
+Where Incentive.type = 'dealer'
