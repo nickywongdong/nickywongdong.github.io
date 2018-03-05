@@ -42,12 +42,10 @@
 								The only things that were changed were the hard coded addresses, and the data that is sent to the Raspberry.
 								For now, the program only sends simple signals to the Raspberry Pi, and the Raspberry Pi will output text based on the signal sent.
 							</p>
-							<p>First the following line was needed to install bluetooth dev capabilities on the Jetson:</p>
-							<pre><code>
-								sudo apt-get install libbluetooth-dev
-							</code></pre>
-							<p>Then the following two files were used and compiled on the Jetson, and Raspberry:</p>
-							<i>Note: the files need to be compiled with the flag "-lbluetooth"</i>
+							<p>First the following line was needed to install bluetooth dev capabilities on the Jetson:<br />
+							<code>sudo apt-get install libbluetooth-dev</code>
+							Then the following two files were used and compiled on the Jetson, and Raspberry:<br />
+							<i>Note: the files need to be compiled with the flag "-lbluetooth"</i><br />
 							<section id="server" class="wrapper">
 							<h3>Example Server Code</h3>
 									<pre><code>
