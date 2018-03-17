@@ -1,6 +1,6 @@
-function deletePerson(id){
+function deleteGuardian(id){
     $.ajax({
-        url: '/people/' + id,
+        url: '/guardian/' + id,
         type: 'DELETE',
         success: function(result){
             window.location.reload(true);

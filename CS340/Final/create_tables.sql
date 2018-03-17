@@ -13,6 +13,7 @@ CREATE TABLE guardian (
     weapon_id int,
     planet_id int,
     npc_id int,
+    current_planet VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
     class VARCHAR(255) NOT NULL,
     race VARCHAR(255) NOT NULL,
@@ -32,6 +33,7 @@ CREATE TABLE npc (
     weapon_id int,
     guardian_id int,
     planet_id int,
+    current_planet VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
     class VARCHAR(255) NOT NULL,
     race VARCHAR(255) NOT NULL,
@@ -73,18 +75,18 @@ CREATE TABLE weapon (
 
 
 -- Inserting Initial Guardians:
-INSERT INTO guardian (name, class, race, level)
+INSERT INTO guardian (name, class, race, level, current_planet)
 VALUES
-('HorsemanSOJelly', 'Hunter', 'Human', '20'),
-('kidvi11ain', 'Warlock', 'Awoken', '20'),
-('IMgrenade', 'Titan', 'Humann', '12');
+('HorsemanSOJelly', 'Hunter', 'Human', '20', 'Earth'),
+('kidvi11ain', 'Warlock', 'Awoken', '20', 'Earth'),
+('IMgrenade', 'Titan', 'Humann', '12', 'Earth');
 
 -- Inserting initial NPCs
-INSERT INTO npc (name, class, race)
+INSERT INTO npc (name, class, race, current_planet)
 VALUES
-('Cayde-6', 'Hunter', 'EXO'),
-('Ikora Rey', 'Warlock', 'Human'),
-('Zavala', 'Titan', 'Awoken');
+('Cayde-6', 'Hunter', 'EXO', 'Io'),
+('Ikora Rey', 'Warlock', 'Human', 'Nessus'),
+('Zavala', 'Titan', 'Awoken', 'Earth');
 
 -- Inserting initial planets
 INSERT INTO planet (name)

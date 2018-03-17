@@ -1,13 +1,14 @@
 <h1>Update {{person.fname}} {{person.lname}}:</h1>
-<form id="update-person" action="/people" method="post">
-    First name: <input type="text" name="fname" value="{{person.fname}}"><br>
-    Last name: <input type="text" name="lname" value="{{person.lname}}"><br>
-    Homeworld: <select name="homeworld" id="planet-selector">
+<form id="update-guardian" action="/guardian" method="post">
+    Name: <input type="text" name="name" value="{{guardian.name}}"><br>
+    Class: <input type="text" name="class" value="{{guardian.class}}"><br>
+    Race: <input type="text" name="race" value="{{guardian.race}}"><br>
+    Current Planet: <select name="current_planet" id="planet-selector">
         {{#each planets}}
         <option value="{{id}}">{{name}}</option>
         {{/each}}
     </select><br>
-    Age: <input type="number" name="age" value="{{person.age}}"><br>
+    Level: <input type="number" name="level" value="{{guardian.level}}"><br>
 </form>
-<button onclick="updatePerson({{person.id}})">Update</button>
-<script defer>selectPlanet({{person.homeworld}});</script>
+<button onclick="updateGuardian({{guardian.id}})">Update</button>
+<script defer>selectPlanet({{person.current_planet}});</script>
