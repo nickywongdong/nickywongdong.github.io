@@ -30,6 +30,7 @@
   <div class="row">
     <span id="score">Score: 0 &nbsp;·&nbsp; Best: 0</span>
     <button id="jumpBtn" type="button">Jump!</button>
+    <button id="testBtn" type="button">Test mode: off</button>
     <a href="index.html">← back to the site</a>
   </div>
 </div>
@@ -47,7 +48,8 @@
   var obstacles = [], clouds = [], score = 0, speed = 5, frame = 0;
   var state = 'ready'; // ready | playing | over
   var gravity = 0.85, jumpV = -14.5;
-  // Test mode: add ?test=1 to the URL to watch the animation with no obstacles.
+  // Test mode: add ?test=1 to the URL, or tap the Test mode button,
+  // to watch the animation with no obstacles. It stays on until toggled off.
   var testMode = new URLSearchParams(location.search).get('test') === '1';
 
   function reset() {
@@ -162,6 +164,14 @@
   });
   canvas.addEventListener('pointerdown', jump);
   document.getElementById('jumpBtn').addEventListener('click', jump);
+  var testBtn = document.getElementById('testBtn');
+  function syncTestBtn() { testBtn.textContent = 'Test mode: ' + (testMode ? 'on' : 'off'); }
+  syncTestBtn();
+  testBtn.addEventListener('click', function () {
+    testMode = !testMode;
+    if (testMode) obstacles = [];
+    syncTestBtn();
+  });
   cat.onload = function () { update(); };
   cat.onerror = function () { update(); };
 })();
