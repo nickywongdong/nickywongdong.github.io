@@ -65,18 +65,25 @@
   function drawCat() {
     ctx.save();
     ctx.imageSmoothingEnabled = false;
-    // The avatar is a front-facing head, so animate the head itself:
-    // bob while running, tilt while jumping, blink every few seconds.
-    // (A tail and legs were drawn before and floated free of the head,
-    //  because the head has no body behind it.)
     var bob = player.jumping ? 0 : Math.sin(frame * 0.35) * 2;
     var x = player.x, y = player.y + bob;
+    // Tilt the whole sprite (head AND tail) together while jumping,
+    // so the tail can never drift away from the head.
     if (player.jumping) {
       ctx.translate(x + 28, y + 28);
       ctx.rotate(-0.08);
       ctx.translate(-28, -28);
     }
+    // Wagging tail, starting deep inside the head so it emerges
+    // from behind the cheek and stays attached.
+    var wag = Math.sin(frame * 0.25) * 6;
+    ctx.strokeStyle = '#4a5568'; ctx.lineWidth = 6; ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(x + 44, y + 40);
+    ctx.quadraticCurveTo(x + 60, y + 32 + wag, x + 66, y + 16 + wag);
+    ctx.stroke();
     ctx.drawImage(cat, x, y, player.w, player.h);
+    // blink every few seconds
     if ((frame % 180) < 8) {
       ctx.fillStyle = '#5b6675';
       ctx.fillRect(x + 14, y + 22, 10, 11);
