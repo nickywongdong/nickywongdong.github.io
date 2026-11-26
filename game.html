@@ -47,6 +47,8 @@
   var obstacles = [], clouds = [], score = 0, speed = 5, frame = 0;
   var state = 'ready'; // ready | playing | over
   var gravity = 0.85, jumpV = -14.5;
+  // Test mode: add ?test=1 to the URL to watch the animation with no obstacles.
+  var testMode = new URLSearchParams(location.search).get('test') === '1';
 
   function reset() {
     obstacles = []; clouds = []; score = 0; speed = 5; frame = 0;
@@ -117,6 +119,7 @@
     drawCat();
     ctx.fillStyle = '#3d2f2f'; ctx.font = 'bold 16px "Trebuchet MS", sans-serif';
     ctx.fillText('Score: ' + Math.floor(score), 12, 24);
+    if (testMode) ctx.fillText('Test mode: no obstacles', W - 210, 24);
     if (state === 'ready') {
       ctx.font = 'bold 22px "Trebuchet MS", sans-serif';
       ctx.fillText('Tap or press Space to start!', W / 2 - 130, H / 2 - 10);
@@ -135,7 +138,8 @@
     clouds = clouds.filter(function (c) { return c.x > -50; });
     if (state !== 'playing') { draw(); requestAnimationFrame(update); return; }
     score += 0.12; speed = 5 + Math.min(6, score / 120);
-    if (frame % 75 === 0) spawn();
+    // First obstacle arrives later (about 3 seconds in), and never in test mode.
+    if (!testMode && frame > 180 && frame % 75 === 0) spawn();
     player.vy += gravity; player.y += player.vy;
     if (player.y >= GROUND - player.h) { player.y = GROUND - player.h; player.vy = 0; player.jumping = false; }
     obstacles.forEach(function (o) { o.x -= speed; });
