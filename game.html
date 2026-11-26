@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Jin Run — a tiny game</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; background: #fff7ec; color: #3d2f2f;
+    font-family: "Trebuchet MS", "Comic Sans MS", system-ui, sans-serif;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; }
+  h1 { margin: 0 0 4px; font-size: 28px; }
+  p.hint { margin: 0 0 12px; color: #8a6d6d; }
+  #wrap { width: min(92vw, 760px); }
+  canvas { width: 100%; height: auto; display: block; background: linear-gradient(#bfe8ff, #fff7ec 70%);
+    border: 4px solid #3d2f2f; border-radius: 16px; image-rendering: pixelated; touch-action: manipulation; }
+  .row { display: flex; gap: 10px; align-items: center; justify-content: space-between; margin-top: 12px; flex-wrap: wrap; }
+  button { font: inherit; font-weight: bold; padding: 10px 18px; border-radius: 999px; border: 3px solid #3d2f2f;
+    background: #ffd166; cursor: pointer; }
+  button:active { transform: translateY(2px); }
+  a { color: #8a6d6d; }
+  #score { font-weight: bold; font-size: 18px; }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <h1>🐾 Jin Run</h1>
+  <p class="hint">Press <b>Space</b>, tap, or click to jump. Dodge the yarn balls and cacti!</p>
+  <canvas id="game" width="760" height="260"></canvas>
+  <div class="row">
+    <span id="score">Score: 0 &nbsp;·&nbsp; Best: 0</span>
+    <button id="jumpBtn" type="button">Jump!</button>
+    <a href="index.html">← back to the site</a>
+  </div>
+</div>
+<script>
+(function () {
+  var canvas = document.getElementById('game');
+  var ctx = canvas.getContext('2d');
+  var scoreEl = document.getElementById('score');
+  var W = canvas.width, H = canvas.height, GROUND = H - 44;
+  var cat = new Image();
+  cat.src = 'images/jin-cat.png';
+  var best = parseInt(localStorage.getItem('jinRunBest') || '0', 10) || 0;
+
+  var player = { x: 70, y: GROUND - 56, w: 56, h: 56, vy: 0, jumping: false };
+  var obstacles = [], clouds = [], score = 0, speed = 5, frame = 0;
+  var state = 'ready'; // ready | playing | over
+  var gravity = 0.85, jumpV = -14.5;
+
+  function reset() {
+    obstacles = []; clouds = []; score = 0; speed = 5; frame = 0;
+    player.y = GROUND - player.h; player.vy = 0; player.jumping = false;
+  }
+  function jump() {
+    if (state === 'ready') { reset(); state = 'playing'; }
+    else if (state === 'over') { reset(); state = 'playing'; return; }
+    if (!player.jumping) { player.vy = jumpV; player.jumping = true; }
+  }
+  function spawn() {
+    var kind = Math.random() < 0.5 ? 'yarn' : 'cactus';
+    var h = kind === 'yarn' ? 30 : 44 + Math.random() * 14;
+    obstacles.push({ x: W + 20, y: GROUND - h, w: 30, h: h, kind: kind });
+  }
+  function drawCat() {
+    ctx.save();
+    ctx.imageSmoothingEnabled = false;
+    // little running bob
+    var bob = player.jumping ? 0 : Math.sin(frame * 0.35) * 2;
+    ctx.drawImage(cat, player.x, player.y + bob, player.w, player.h);
+    ctx.restore();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    // sun + clouds
+    ctx.fillStyle = '#ffd166';
+    ctx.beginPath(); ctx.arc(W - 70, 42, 24, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = 'rgba(255,255,255,0.9)';
+    clouds.forEach(function (c) { ctx.beginPath(); ctx.ellipse(c.x, c.y, 34, 12, 0, 0, Math.PI * 2); ctx.fill(); });
+    // ground
+    ctx.fillStyle = '#8bc34a'; ctx.fillRect(0, GROUND, W, H - GROUND);
+    ctx.fillStyle = '#6d4c41'; ctx.fillRect(0, GROUND, W, 4);
+    // obstacles
+    obstacles.forEach(function (o) {
+      if (o.kind === 'yarn') {
+        ctx.fillStyle = '#ff6b9d';
+        ctx.beginPath(); ctx.arc(o.x + 15, o.y + 15, 15, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = '#d14d7d'; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.arc(o.x + 15, o.y + 15, 9, 0, Math.PI * 1.5); ctx.stroke();
+      } else {
+        ctx.fillStyle = '#2e9e5b';
+        ctx.fillRect(o.x + 8, o.y, 14, o.h);
+        ctx.fillRect(o.x, o.y + 12, 10, 8); ctx.fillRect(o.x + 20, o.y + 18, 10, 8);
+      }
+    });
+    drawCat();
+    ctx.fillStyle = '#3d2f2f'; ctx.font = 'bold 16px "Trebuchet MS", sans-serif';
+    ctx.fillText('Score: ' + Math.floor(score), 12, 24);
+    if (state === 'ready') {
+      ctx.font = 'bold 22px "Trebuchet MS", sans-serif';
+      ctx.fillText('Tap or press Space to start!', W / 2 - 130, H / 2 - 10);
+    }
+    if (state === 'over') {
+      ctx.font = 'bold 26px "Trebuchet MS", sans-serif';
+      ctx.fillText('Oh no! Jin tripped!', W / 2 - 110, H / 2 - 20);
+      ctx.font = '16px "Trebuchet MS", sans-serif';
+      ctx.fillText('Tap or press Space to try again', W / 2 - 118, H / 2 + 8);
+    }
+  }
+  function update() {
+    frame++;
+    if (frame % 90 === 0) clouds.push({ x: W + 40, y: 30 + Math.random() * 50 });
+    clouds.forEach(function (c) { c.x -= 1; });
+    clouds = clouds.filter(function (c) { return c.x > -50; });
+    if (state !== 'playing') { draw(); requestAnimationFrame(update); return; }
+    score += 0.12; speed = 5 + Math.min(6, score / 120);
+    if (frame % 75 === 0) spawn();
+    player.vy += gravity; player.y += player.vy;
+    if (player.y >= GROUND - player.h) { player.y = GROUND - player.h; player.vy = 0; player.jumping = false; }
+    obstacles.forEach(function (o) { o.x -= speed; });
+    obstacles = obstacles.filter(function (o) { return o.x + o.w > -10; });
+    for (var i = 0; i < obstacles.length; i++) {
+      var o = obstacles[i];
+      if (player.x + 8 < o.x + o.w - 4 && player.x + player.w - 8 > o.x + 4 &&
+          player.y + 6 < o.y + o.h && player.y + player.h - 4 > o.y) {
+        state = 'over';
+        if (Math.floor(score) > best) { best = Math.floor(score); localStorage.setItem('jinRunBest', String(best)); }
+        break;
+      }
+    }
+    scoreEl.textContent = 'Score: ' + Math.floor(score) + '  ·  Best: ' + best;
+    draw();
+    requestAnimationFrame(update);
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.code === 'Space' || e.code === 'ArrowUp') { e.preventDefault(); jump(); }
+  });
+  canvas.addEventListener('pointerdown', jump);
+  document.getElementById('jumpBtn').addEventListener('click', jump);
+  cat.onload = function () { update(); };
+  cat.onerror = function () { update(); };
+})();
+</script>
+</body>
+</html>
