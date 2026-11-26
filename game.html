@@ -44,7 +44,7 @@
   cat.src = 'images/jin-cat.png';
   var best = parseInt(localStorage.getItem('jinRunBest') || '0', 10) || 0;
 
-  var player = { x: 70, y: GROUND - 56, w: 56, h: 56, vy: 0, jumping: false };
+  var player = { x: 70, y: GROUND - 56, w: 65, h: 56, vy: 0, jumping: false };
   var obstacles = [], clouds = [], score = 0, speed = 5, frame = 0;
   var state = 'ready'; // ready | playing | over
   var gravity = 0.85, jumpV = -14.5;
@@ -69,30 +69,14 @@
   function drawCat() {
     ctx.save();
     ctx.imageSmoothingEnabled = false;
+    // Real full-body sprite now: body, legs and tail are all in the
+    // image itself, so nothing is drawn on top of it. Animate the
+    // whole sprite with a bob while running only. No tilt while
+    // jumping: tilting rotated the sprite around its center, which
+    // shifted its feet sideways in the air and back on landing.
     var bob = player.jumping ? 0 : Math.sin(frame * 0.35) * 2;
     var x = player.x, y = player.y + bob;
-    // Tilt the whole sprite (head AND tail) together while jumping,
-    // so the tail can never drift away from the head.
-    if (player.jumping) {
-      ctx.translate(x + 28, y + 28);
-      ctx.rotate(-0.08);
-      ctx.translate(-28, -28);
-    }
-    // Wagging tail, starting deep inside the head so it emerges
-    // from behind the cheek and stays attached.
-    var wag = Math.sin(frame * 0.25) * 6;
-    ctx.strokeStyle = '#4a5568'; ctx.lineWidth = 6; ctx.lineCap = 'round';
-    ctx.beginPath();
-    ctx.moveTo(x + 44, y + 40);
-    ctx.quadraticCurveTo(x + 60, y + 32 + wag, x + 66, y + 16 + wag);
-    ctx.stroke();
     ctx.drawImage(cat, x, y, player.w, player.h);
-    // blink every few seconds
-    if ((frame % 180) < 8) {
-      ctx.fillStyle = '#5b6675';
-      ctx.fillRect(x + 14, y + 22, 10, 11);
-      ctx.fillRect(x + 34, y + 21, 10, 11);
-    }
     ctx.restore();
   }
   function draw() {
